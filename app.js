@@ -38,7 +38,7 @@ function countUp(id, target) {
 }
 
 // Call the function for each counter
-countUp('projects-count', 5);  // Start count for complete projects
+countUp('projects-count', 10);  // Start count for complete projects
 countUp('clients-count', 10);   // Start count for happy clients
 countUp('completed-count', 100,'%'); // Start count for completed projects
 
