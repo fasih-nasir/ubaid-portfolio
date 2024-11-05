@@ -1,516 +1,94 @@
-:root{
-    --font-family: "Plus Jakarta Sans", sans-serif;
-    --font-family1: "Poppins", sans-serif;
-    --color: #78CC6D;
-    --color2: rgb(223, 223, 223);
-    --backround1:#242424;
-    --background:#161616;
+const titles = ["Shopify Developer", "WordPress Developer", "Canvas Designer"];
+let currentIndex = 0;
+const jobTitleElements = document.querySelectorAll(".job-title"); // Select all elements with class 'job-title'
 
-}
-body{
-    background-color: #333333 !important;
-    transition: 0.9s ease;
-    overflow: hidden;
-    /* height: 100vh !important; */
-    margin: 0px;
-    padding: 0px;
-    text-transform: capitalize;   
+// Function to change the title with a slide-up effect
+function changeTitle() {
+  // Loop through all elements with class 'job-title'
+  jobTitleElements.forEach((jobTitleElement) => {
+    jobTitleElement.classList.remove("slide-up"); // Remove the animation class first
     
-    font-family: var(--font-family);
-}
-video{
-    position: relative;
-    height: 100vh;
-    object-fit: cover !important;
-    background-size: cover !important;
-    width: 100% !important; 
-    margin: 0px !important;
-    padding: 0px !important;
-}
-#home{
-    position: absolute;
-    top: 6px;
-    height: 98vh;
-   
-}
-#home>div{
-
-    border: 2px solid transparent !important;
-}
-.d1{
-    background-color:var(--background);
-    border-top-left-radius: 32px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 32px;
-    border-bottom-left-radius: 32px;
-    padding: 40px;height: 98vh !important;
-}
-.d1>div>p{
-    font-family: var(--font-family1);
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: var(--color);
-    text-align: center;
-
-}
-.d1>div>h3{
-    text-align: center;
-    font-weight: 600;
-    color: white;
-    font-family: var(--font-family1);
-}
-.d1>div>span>a>i{
-    font-size: 16px;
-    color: white;
-    padding: 15px;
-    border-radius: 6px;
-    border: 1px solid rgba(105, 105, 105, 0.328);
-}
-.d1>div>span>a>i:hover{
-    cursor: grab;
-    color: var(--color);
+    // Wait for a brief moment, then change the text and re-add the animation class
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % titles.length; // Update index
+      jobTitleElement.textContent = titles[currentIndex]; // Change the title
+      jobTitleElement.classList.add("slide-up"); // Trigger the slide-up animation
+    }, 100); // Small delay to re-trigger animation
+  });
 }
 
-/* offcanvs */
-.offcanvas{
+// Start with the first title and add the slide-up class to animate
+jobTitleElements.forEach((jobTitleElement) => {
+  jobTitleElement.classList.add("slide-up");
+});
 
-    transition: 1.1s ease-in-out;
-    /* position: relative; */
-background-color:var(--background)
-;
-overflow: hidden !important;
-}
-.d3 {
-overflow: hidden !important;
-
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: space-around; */
-
-height: 90vh;
-    border-top-left-radius: 32px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 32px;
-    border-bottom-left-radius: 32px;
-    padding: 40px;
-}
-.closecan{
-    transform: rotate(180deg);
-    color: white;
-    font-size: 24px;
-    background-color: var(--color);
-    padding: 10px;
-    position: absolute;
-    top: 50%;
-    z-index: 2px !important;
-    right: -1px;
-}
-.d3 > div > p {
-    font-family: var(--font-family1);
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: var(--color);
-    text-align: center;
-}
-
-.d3 > div > h3 {
-    text-align: center;
-    font-weight: 600;
-    color: white;
-    font-family: var(--font-family1);
-}
-
-.d3 > div > span > a > i {
-    font-size: 16px;
-    color: white;
-    padding: 15px;
-    border-radius: 6px;
-    border: 1px solid rgba(105, 105, 105, 0.328);
-}
-
-.d3 > div > span > a > i:hover {
-    cursor: grab;
-    color: var(--color);
-}
-/* offcanvas */
-.d2{
-    overflow-y: scroll !important;
-    height:98vh !important; margin: 0px !important;
-    ;padding: 0px !important;
-   
-    border-top-left-radius: 0px;
-    border-top-right-radius: 32px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-.d2::-webkit-scrollbar{
-    background-color: transparent;
-}
-
-.job-title-container {
-    color: var(--color) !important; /* Default color */
-    /* margin-bottom: 15px; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.8s ease;
-  }
-  
-  .job-title {
-    font-weight: 600 !important;
-    letter-spacing: 1.2px !important;
-    margin: 10px 0px;
-    color: var(--color) !important;
-    /* position: relative; */
-    opacity: 1; /* Start visible */
-  }
-  
-  /* Keyframes for sliding up */
-  @keyframes slide-up {
-    0% {
-      transform: translateY(100%); /* Start from below */
-      opacity: 0; /* Invisible */
+// Change title every 5 seconds
+setInterval(changeTitle, 5000);
+function countUp(id, target) {
+  let count = 0;
+  const element = document.getElementById(id);
+  const interval = setInterval(() => {
+    if (count < target) {
+      count++;
+      element.innerHTML = count;
+    } else {
+      clearInterval(interval); // Stop the interval once the target is reached
     }
-    100% {
-      transform: translateY(0); /* Move to original position */
-      opacity: 1; /* Fully visible */
-    }
-  }
-  
-  /* Adding the animation class */
-  .slide-up {
-    animation: slide-up 0.5s ease-in-out;
-  }
-  .about>div>h1{
-   color: rgb(223, 223, 223);
-    font-family: var(--font-family) !important ;
-  }
-  .about>div>.span1{
-    color: var(--color2) !important;
-    font-size: 14px;
-font-weight: 400;
-letter-spacing: 0.12px;  
-}
-@media (max-width:992px) {
-    .d1{
-        display: none;
-    }
-    .btncan{
-        display: block;
-    }
-    .navdiv{
-        width: 87% !important;
-    }
-    
-}
-.navdiv{
- z-index: 220 !important;
-    position: fixed;
-    width: 59%;
-    /* margin: 0px !important; */
-    border-top-left-radius: 0px;
-    border-top-right-radius: 32px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    padding:5px 10px !important;
-    /* margin: 5px; */
-
-    background-color:var(--backround1);
-}
-.navdiv>nav>a{
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 14px;
-    transition: 0.4s ease !important;
-    box-sizing: border-box;
-    border: 1px solid rgb(91, 91, 91);
-    /* background-color:var(--background); */
-    color: white;
-}
-.navdiv>nav>a:hover{
-    transition: 0.4s ease !important;
-
-    /* padding: 10px; */
-    border: 1px solid var(--color);
-}
-.btncan{
-    outline: none !important;
-    color: white;
-    top: 50%;
-    color: white;
-    font-size: 24px;
-    background-color: var(--color);
-    padding: 10px 15px;
-    border-top-right-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
-    
-    position: absolute;
-    z-index: 2 !important;
-    
+  }, 200); // Adjust the speed of the counter
 }
 
-@media (min-width:992px) {
-    .d2{
-        width: 66%;
-    }
-    .btncan{
-        display: none;
-    }
-}
-nav>a{
-    z-index: 200px !important;
-}
-.about{
-    color: var(--color2) !important;
-    z-index: -1 !important;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 32px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    
-    margin: 70px 0px;
-    /* padding-top: 50px !important; */
-    /* height: 105vh; */
-    background-color: var(--background);
-    /* padding-top: 100px !important; */
-    color: white;
-    /* border: 1px solid transparent !important; */
-}
+// Call the function for each counter
+countUp('projects-count', 10);  // Start count for complete projects
+countUp('clients-count', 10);   // Start count for happy clients
+countUp('completed-count', 100,'%'); // Start count for completed projects
 
-#projects-count{
-    transition: 0.7s ease;
-}
 
-.card{
-/* z-index: 1 !important; */
-/* z-index: 1px !important; */
-    color:var(--color2);
-    font-weight: 400;
-    letter-spacing: 0.2px;
-    background-color: var(--backround1);
-}
-.card>div>img{z-index: 1 !important;
-    padding: 10px;
-    background-color: white;
-}
-input,textarea{
-    color: var(--color2) !important;
-    padding: 10px 10px !important;
-    border: none !important;
-    outline: none !important;
-    transition: 0.5s ease; 
-    background-color: var(--backround1) !important;
-}
-input:focus{
-    outline: 1px solid var(--color) !important;
+// contact form 
+const form = document.getElementById('form');
+const result = document.getElementById('result');
 
-}
-.submitbtn{
-    color: var(--backround1);
-    padding: 10px;
-transition: 0.5s ease-in-out;
-    background-color: var(--color);
-}
-.submitbtn:hover{
-    font-weight: bolder;
-    color: var(--color);
-    background-color: var(--backround1);
-}
-/*  */
-.card-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  .card-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .card-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Please wait..."
 
-    background-color:#78cc6d6d !important;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .fa-eye{
-    padding:5px 10px;
-    opacity: 0.950;
-    color: white;
-    /* background-color: white !important; */
-    font-size: 24px;
-  }
-  .card-container:hover img {
-    transform: scale(1.1);
-  }
-  
-  .card-container:hover .card-content {
-    opacity: 1;
-  }
-  /*  */
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = "Form submitted successfully";
+          alert("Your Msg Is Send To Admin")
+              } else {
+                console.log(response);
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
+});
 
-  .loadcontainer{
-    transition: 0.5s ease-in-out;
-    position: fixed;
-    top: 0px;
-    z-index:1000 ;
-    background-color: var(--background);
-    height: 100vh !important;
-  }
-  /* From Uiverse.io by Li-Deheng */ 
-.loader {
-    transition: 0.5s ease-in-out;
-    transition: 0.5s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    --color: hsl(0, 0%, 87%);
-    --animation: 2s ease-in-out infinite;
-  }
-  
-  .loader .circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    border: solid 2px var(--color);
-    border-radius: 50%;
-    margin: 0 10px;
-    background-color: transparent;
-    animation: circle-keys var(--animation);
-  }
-  
-  .loader .circle .dot {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: var(--color);
-    animation: dot-keys var(--animation);
-  }
-  
-  .loader .circle .outline {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    animation: outline-keys var(--animation);
-  }
-  
-  .circle:nth-child(2) {
-    animation-delay: 0.3s;
-  }
-  
-  .circle:nth-child(3) {
-    animation-delay: 0.6s;
-  }
-  
-  .circle:nth-child(4) {
-    animation-delay: 0.9s;
-  }
-  
-  .circle:nth-child(5) {
-    animation-delay: 1.2s;
-  }
-  
-  .circle:nth-child(2) .dot {
-    animation-delay: 0.3s;
-  }
-  
-  .circle:nth-child(3) .dot {
-    animation-delay: 0.6s;
-  }
-  
-  .circle:nth-child(4) .dot {
-    animation-delay: 0.9s;
-  }
-  
-  .circle:nth-child(5) .dot {
-    animation-delay: 1.2s;
-  }
-  
-  .circle:nth-child(1) .outline {
-    animation-delay: 0.9s;
-  }
-  
-  .circle:nth-child(2) .outline {
-    animation-delay: 1.2s;
-  }
-  
-  .circle:nth-child(3) .outline {
-    animation-delay: 1.5s;
-  }
-  
-  .circle:nth-child(4) .outline {
-    animation-delay: 1.8s;
-  }
-  
-  .circle:nth-child(5) .outline {
-    animation-delay: 2.1s;
-  }
-  
-  @keyframes circle-keys {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  
-    50% {
-      transform: scale(1.5);
-      opacity: 0.5;
-    }
-  
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes dot-keys {
-    0% {
-      transform: scale(1);
-    }
-  
-    50% {
-      transform: scale(0);
-    }
-  
-    100% {
-      transform: scale(1);
-    }
-  }
-  
-  @keyframes outline-keys {
-    0% {
-      transform: scale(0);
-      outline: solid 20px var(--color);
-      outline-offset: 0;
-      opacity: 1;
-    }
-  
-    100% {
-      transform: scale(1);
-      outline: solid 0 transparent;
-      outline-offset: 20px;
-      opacity: 0;
-    }
-  }
+var loader = document.getElementById("loader");
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Set a timeout to remove the loader after 5 seconds (5000 milliseconds)
+  setTimeout(() => {
+    loader.remove(); // Removes the loader element from the DOM
+  }, 5000);
+});
