@@ -90,5 +90,44 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set a timeout to remove the loader after 5 seconds (5000 milliseconds)
   setTimeout(() => {
     loader.remove(); // Removes the loader element from the DOM
-  }, 5000);
+  }, 0);
 });
+
+
+// ================= THEME BTN START =======================
+var toogle_theme=document.getElementById("toogle_theme");
+var theme_now;
+
+
+// ==============================
+toogle_theme.addEventListener("click",()=>{
+ 
+localStorage.setItem( "theme", localStorage.getItem("theme") === "black" ? "white" :"black");
+theme_now=localStorage.getItem("theme");
+ 
+
+if(theme_now === "white"){
+  document.body.style.backgroundColor=`rgb(255, 255, 255)`
+  document.documentElement.style.setProperty('--background', 'rgb(228, 228, 228)'); // light background
+  document.documentElement.style.setProperty('--backround1', 'rgb(175, 175, 175)'); // light background
+
+  document.documentElement.style.setProperty('--color2', '#3d3d3d'); // light background
+
+}
+else{
+  document.body.style.backgroundColor=`rgb(27, 27, 27)`;
+  
+  document.documentElement.style.setProperty('--background', '#161616'); // light background
+  document.documentElement.style.setProperty('--backround1', '#242424'); // light background
+
+  document.documentElement.style.setProperty('--color2', 'rgb(228, 228, 228)'); // light background
+
+
+}
+
+
+}
+)
+
+  
+// ================= THEME BTN END =========================
